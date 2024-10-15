@@ -1,18 +1,21 @@
 #!/bin/bash
-export XDG_CONFIG_HOME="$HOME"/.config
 
-ln -s "$PWD"/nix/.config/nixpkgs/ "$XDG_CONFIG_HOME"/nixpkgs
+# Exit immediately if a command exits with a non-zero status
+set -e
 
-# Installing packages with nix
-nix-env -iA nixpkgs.myPackages
+# Installing home manager
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
 
-# Restow'ing dotfiles
-stow --verbose --target="$HOME" --restow */
+echo "Setting up Home Manager using home.nix..."
 
-# mkdir -p "$XDG_CONFIG_HOME"/nixpkgs
-# ln -sf "$PWD/config.nix" "$XDG_CONFIG_HOME"/nixpkgs/config.nix
+mkdir -p "$HOME/.config/home-manager"
+ln -sf "$PWD/home.nix" "$HOME/.config/home-manager/home.nix"
 
-# ln -sf "$PWD/nvim" "$XDG_CONFIG_HOME/nvim"
+# Run home manager
+nix-shell '<home-manager>' -A install
 
-# ln -sf "$PWD/.zshenv" "$HOME/.zshenv"
-# ln -sf "$PWD/zsh" "$XDG_CONFIG_HOME/zsh"
+# Apply the configurations inside home.nix
+export PATH="$PATH:$HOME/.nix-profile/bin"
+source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+home-manager switch
