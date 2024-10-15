@@ -1,0 +1,6 @@
+# zsh debug files
+zsh/.config/zsh/.antidote/
+zsh/.config/zsh/.zcompdump*
+
+# monitor settings are specific to your local machine
+./hyprland/.config/hypr/conf/monitor.conf
