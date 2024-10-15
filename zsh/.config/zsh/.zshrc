@@ -25,9 +25,9 @@ source ${zsh_plugins}.zsh
 # Load custom configurations
 source $ZDOTDIR/custom/*.zsh
 
-# auto start tmux
-if [ "$TMUX" = "" ]; then
-  exec tmux
+if [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
 fi
 
 if [ -f "$HOME/.cargo/env" ]; then
