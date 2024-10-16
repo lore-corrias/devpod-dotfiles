@@ -17,6 +17,6 @@ and then connect either via docker/podman or SSH.
 
 ## Things to yet be done
 
-- [ ] Sync `nvim` clipboard with host
+- [X] Sync `nvim` clipboard with host
 - [ ] Configure standard plugins for `nvim`
-- [ ] Maybe move to [home-manager](https://alex.pearwin.com/2021/07/managing-dotfiles-with-nix/)(?)
+- [X] Maybe move to [home-manager](https://alex.pearwin.com/2021/07/managing-dotfiles-with-nix/)(?)

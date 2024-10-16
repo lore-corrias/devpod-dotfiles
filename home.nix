@@ -1,8 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "vscode";
-  home.homeDirectory = "/home/vscode";
+  # Define the username and home directory based on environment variables
+  home.username = builtins.getEnv "HOME_USERNAME";
+  home.homeDirectory = "/home/${builtins.getEnv "HOME_USERNAME"}";
 
   home.packages = [
     pkgs.neovim
@@ -13,6 +14,7 @@
     pkgs.fzf
     pkgs.lazygit
     pkgs.eza
+    pkgs.wl-clipboard
   ];
 
   # Step 2: Linking dotfiles using home.file
