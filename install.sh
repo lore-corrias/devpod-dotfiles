@@ -9,7 +9,7 @@ nix-channel --update
 
 echo "Setting up Home Manager using home.nix..."
 
-mkdir -p "$HOME/.config/home-manager"
+mkdir -p "$HOME/.config/home-manager/custom"
 ln -sf "$PWD/home.nix" "$HOME/.config/home-manager/home.nix"
 
 # Run home manager

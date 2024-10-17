@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Define the username and home directory based on environment variables
@@ -25,6 +25,9 @@
     };
 
   home.stateVersion = "24.05";
+
+  # this is ugly, to be improved
+  imports = map (file: import "/home/${builtins.getEnv "HOME_USERNAME"}/.config/home-manager/custom/${file}") (lib.filter (name: lib.hasSuffix ".nix" name) (builtins.attrNames (builtins.readDir "/home/${builtins.getEnv "HOME_USERNAME"}/.config/home-manager/custom")));
 
   programs.home-manager.enable = true;
 }
